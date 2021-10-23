@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>19IT141-Get Weather Info </title>
+	<!-- bootstrap -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<!-- jquery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">		
+	</script>
+	<!-- js -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+	<!-- css -->
+	<link rel="stylesheet" type="text/css" href="style.css">
+	 
+</head>
+<body>
+    <h3 class="header">Welcom To My Weather App</h3>
+
+	<div class="w-50 ml-0 mr-0 mt-5 mx-auto alert alert-primary" role="alert">
+		<h6>City Name</h6>
+		<input type="text" id="city" placeholder="Enter City Name">
+		<button class="btn btn-primary" id="GetWeatherInfo" >GetWeatherInfo</button>
+		
+		<div class="mt-4" id="show"></div>
+	</div>
+
+	<h2 class="footer">&#169;Parimal Tank</h2>
+
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("#GetWeatherInfo").click(function(){
+				var city=$("#city").val();
+			//your API key
+			var key='bea64792551047ca67bb92297d8c3846'; 
+
+			$.ajax({
+				url:'http://api.openweathermap.org/data/2.5/weather',
+				dataType:'json',
+				type:'GET',
+				data:{q:city ,appid:key},
+
+				success:function(data){
+				    var content = '';                    
+				    $.each(data.weather, function (index, val) {
+				        var temperature = Math.round(data.main.temp);
+				        var celcious = temperature - 273;
+				        var humidity = data.main.humidity;
+				        var weathercondition = data.weather[0].main;
+				        var description = data.weather[0].description;
+				        var icon = data.weather[0].icon+'.png';
+				        content += '<p><b> Temperature : ' + celcious + '&deg; C</b></p>';
+				        content += '<p><b> Humidity : ' + humidity + '</b></p>';
+				        content += '<p><b> Weather : ' + weathercondition + '[' + description + ']' + '</b></p>';
+				        content += '<p><img src=http://openweathermap.org/img/wn/' + icon + '>' + '</p>';
+					});
+					$("#show").html(content);
+				}
+			});
+		});
+		});
+	</script>
+
+</body>
+</html>
