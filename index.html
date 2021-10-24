@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>19IT141-Get Weather Info </title>
 	<!-- bootstrap -->
@@ -13,6 +14,7 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 	 
 </head>
+
 <body>
     <h3 class="header">Welcom To My Weather App</h3>
 
@@ -31,7 +33,7 @@
 			$("#GetWeatherInfo").click(function(){
 				var city=$("#city").val();
 			//your API key
-			var key='bea64792551047ca67bb92297d8c3846'; 
+			var key=''; 
 
 			$.ajax({
 				url:'http://api.openweathermap.org/data/2.5/weather',
